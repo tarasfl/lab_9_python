@@ -29,24 +29,26 @@ class Triangle:
 class Cylinder(Rectangle, Circle):
     def __int__(self, height, width):
         super().__int__(height, width)
-        super().__int__(width/2)
+        super().__int__(width / 2)
 
     def get_surface_square(self):
-        return 2 * super(Circle).get_square() + 2 * math.pi * (super()._width/2) * super()._height
+        return 2 * super(Circle).get_square() + 2 * math.pi * (super()._width / 2) * super()._height
 
 
 class Sphere(Circle):
     def __int__(self, radius):
         super().__int__(radius)
 
-
-class Cone(Triangle, Circle):
-    def __int__(self, hypotenuse, leg1, leg2, height, radius, ):
-        super().__int__(hypotenuse, leg1, leg2, height)
-        super().__int__(radius)
-
     def get_volume(self) -> float:
-        return (1/3)*math.pi*super()._radius*super()._radius*super()._height
+        return math.pi * super()._radius * super()._radius * super()._radius * 4 / 3
+
+
+class Cone(Triangle):
+    def __int__(self, hypotenuse, leg1, leg2, height):
+        super().__int__(hypotenuse, leg1, leg2, height)
+
+    def get_square_of_bottom(self) -> float:
+        return math.pi * (super()._hypotenuse * super()._hypotenuse) / 4
 
 
 if __name__ == '__main__':
