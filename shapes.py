@@ -2,54 +2,56 @@ import math
 
 
 class Circle:
-    def __int__(self, r):
-        self._radius = r
+
+    def __init__(self, radius):
+        self._radius = radius
 
     def get_square(self) -> float:
         return math.pi * self._radius * self._radius
 
 
 class Rectangle:
-    def __int__(self, rectangle_height, rectangle_width):
-        self._height = rectangle_height
-        self._width = rectangle_width
+    def __init__(self, height, width):
+        self._height = height
+        self._width = width
 
     def get_square(self) -> float:
         return self._width * self._height
 
 
 class Triangle:
-    def __int__(self, hypotenuse, leg1, leg2, height):
+    def __init__(self, hypotenuse, leg1, leg2, height):
         self._hypotenuse = hypotenuse
         self._leg1 = leg1
         self._leg2 = leg2
         self._height = height
 
 
-class Cylinder(Rectangle, Circle):
-    def __int__(self, height, width):
-        super().__int__(height, width)
-        super().__int__(width / 2)
+class Cylinder(Rectangle):
+    def __init__(self, height, width):
+        super().__init__(height, width)
 
     def get_surface_square(self):
-        return 2 * super(Circle).get_square() + 2 * math.pi * (super()._width / 2) * super()._height
+        return math.pi * (self._width * self._width) / 4 + 2 * math.pi * (self._width / 2) * self._height
 
 
 class Sphere(Circle):
-    def __int__(self, radius):
-        super().__int__(radius)
+    def __init__(self, radius):
+        super().__init__(radius)
 
     def get_volume(self) -> float:
-        return math.pi * super()._radius * super()._radius * super()._radius * 4 / 3
+        return math.pi * (self._radius * self._radius * self._radius) * 4 / 3
 
 
 class Cone(Triangle):
-    def __int__(self, hypotenuse, leg1, leg2, height):
-        super().__int__(hypotenuse, leg1, leg2, height)
+    def __init__(self, hypotenuse, leg1, leg2, height):
+        super().__init__(hypotenuse, leg1, leg2, height)
 
     def get_square_of_bottom(self) -> float:
-        return math.pi * (super()._hypotenuse * super()._hypotenuse) / 4
+        return math.pi * (self._hypotenuse * self._hypotenuse) / 4
 
 
 if __name__ == '__main__':
-    pass
+    s = Sphere(9)
+
+    print(s.get_volume())
